@@ -27,7 +27,7 @@ spec:
     app: javaapp  # Service selector to match the deployment's pods
   ports:
     - protocol: TCP
-      port: 80       # Expose port 80 externally
+      port: 8000       # Expose port 80 externally
       targetPort: 8000  # Forward traffic to container port 8000
       nodePort: 30000  # NodePort on your Kubernetes node (ensure it's available)
   type: NodePort  # Service type: expose it externally via NodePort
