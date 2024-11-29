@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: javaapp-deployment
 spec:
-  replicas: 2  # Adjust the number of replicas if needed
+  replicas: 2  # Number of replicas (adjust as needed)
   selector:
     matchLabels:
-      app: javaapp
+      app: javaapp  # Label selector to match pods
   template:
     metadata:
       labels:
-        app: javaapp
+        app: javaapp  # Ensure this label matches the service selector
     spec:
       containers:
         - name: javaapp
-          image: premgowda07/javaapp_241047037  # Replace with your Docker image name
+          image: premgowda07/javaapp_241047037  # Docker image name (replace if necessary)
           ports:
-            - containerPort: 8000  # Expose port 8000 inside the container
+            - containerPort: 8000  # Expose port 8000 inside the container (matches your Dockerfile)
 ---
 apiVersion: v1
 kind: Service
@@ -24,10 +24,10 @@ metadata:
   name: javaapp-service
 spec:
   selector:
-    app: javaapp  # This will select the pods created by the deployment
+    app: javaapp  # Service selector to match the deployment's pods
   ports:
     - protocol: TCP
-      port: 80  # Expose port 80 for external access
-      targetPort: 8000  # Map it to port 8000 in the container
-      nodePort: 30000  # Specify a nodePort (choose an available port)
-  type: NodePort  # Expose the service as a NodePort (for local access)
+      port: 80       # Expose port 80 externally
+      targetPort: 8000  # Forward traffic to container port 8000
+      nodePort: 30000  # NodePort on your Kubernetes node (ensure it's available)
+  type: NodePort  # Service type: expose it externally via NodePort
