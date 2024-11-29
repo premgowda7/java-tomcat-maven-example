@@ -29,5 +29,5 @@ spec:
     - protocol: TCP
       port: 80  # Expose port 80 for external access
       targetPort: 8000  # Map it to port 8000 in the container
-      nodePort: 30001  # The port on the node (accessible externally)
+      nodePort:   # The port on the node (accessible externally)
   type: NodePort  # Expose the service as a NodePort (for local access)
